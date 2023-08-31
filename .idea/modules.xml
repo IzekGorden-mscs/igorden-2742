@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ex2a/ex2a.iml" filepath="$PROJECT_DIR$/ex2a/ex2a.iml" />
       <module fileurl="file://$PROJECT_DIR$/izek-gorden-2742.iml" filepath="$PROJECT_DIR$/izek-gorden-2742.iml" />
     </modules>
   </component>
