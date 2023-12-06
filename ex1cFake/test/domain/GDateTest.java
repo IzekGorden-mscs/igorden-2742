@@ -1,3 +1,5 @@
+package domain;
+
 import domain.GDate;
 import org.junit.jupiter.api.Test;
 

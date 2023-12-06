@@ -34,7 +34,7 @@ public class Invoice {
         this.invoiceDate = new GDate(invoice.invoiceDate.julianDay());
         //this.dueDate = invoice.dueDate;
         this.dueDate = new GDate(invoice.dueDate.julianDay());
-        this.lineItems = invoice.lineItems;
+        this.lineItems = invoice.getLineItems();
     }
 
     public Invoice copy() {
@@ -113,7 +113,21 @@ public class Invoice {
     }
 
     public ArrayList<LineItem> getLineItems() {
-        return lineItems;
+        //return lineItems;
+        ArrayList<LineItem> newLines = new ArrayList<LineItem>();
+        for(LineItem lineItem : lineItems){
+           newLines.add(lineItem.copy());
+        }
+        return newLines;
+    }
+
+    public LineItem getLineItem(int index){
+        if(index > this.lineItems.size()-1 || index < 0){
+            return null;
+        }
+        else {
+            return this.lineItems.get(index).copy();
+        }
     }
 
     @Override
