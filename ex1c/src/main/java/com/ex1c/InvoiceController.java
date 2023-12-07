@@ -117,7 +117,7 @@ public class InvoiceController {
     public void onListSelect(MouseEvent mouseEvent) {
         displayLineItem();
     }
-
+//
     public void onAddLineItem(ActionEvent actionEvent) {
         double amount = 0;
         String description = "Error: empty or invalid";
