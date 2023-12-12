@@ -6,14 +6,9 @@
       <list>
         <option value="$PROJECT_DIR$/ex1c/pom.xml" />
         <option value="$PROJECT_DIR$/demo1/pom.xml" />
-        <option value="$PROJECT_DIR$/ex1d/pom.xml" />
-        <option value="$PROJECT_DIR$/ex1daaaa/pom.xml" />
+        <option value="$PROJECT_DIR$/ex1dForReal/pom.xml" />
+        <option value="$PROJECT_DIR$/ex1dTheChoseOne/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/ex1d/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
