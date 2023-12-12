@@ -19,15 +19,12 @@ import java.util.ArrayList;
 
 public class ApartmentController {
 
-
-    private final ArrayList<Apartment> apartments;
-    private ArrayList<Person> people;
     @FXML
-    public ComboBox apartmentCombo;
+    public ComboBox<Apartment> apartmentCombo;
     @FXML
-    public ComboBox adminCombo;
+    public ComboBox<Person> adminCombo;
     @FXML
-    public ComboBox tenantCombo;
+    public ComboBox<Person> tenantCombo;
     @FXML
     public TextField numField;
     @FXML
@@ -42,8 +39,6 @@ public class ApartmentController {
     private ArrayList<Invoice> invoices;
 
     public ApartmentController() {
-        this.apartments = DbContext.getApartments();
-        this.people = DbContext.getPeople();
     }
 
 
@@ -52,12 +47,12 @@ public class ApartmentController {
         apartmentCombo.getItems().clear();
         adminCombo.getItems().clear();
         tenantCombo.getItems().clear();
-        for (Apartment apt:this.apartments) {
-            apartmentCombo.getItems().add(apt.toShortString());
+        for (Apartment apt : DbContext.getApartments()) {
+            apartmentCombo.getItems().add(apt);
         }
-        for (Person p:this.people) {
-            adminCombo.getItems().add(p.toShortString());
-            tenantCombo.getItems().add(p.toShortString());
+        for (Person p : DbContext.getPeople()) {
+            adminCombo.getItems().add(p);
+            tenantCombo.getItems().add(p);
         }
         apartmentCombo.getSelectionModel().select(aptIndex);
         displayApartment();
@@ -68,11 +63,8 @@ public class ApartmentController {
     }
 
     public void displayApartment() {
-        int index = apartmentCombo.getSelectionModel().getSelectedIndex();
-        if(index ==-1){
-            index = 0;
-        }
-        Apartment apt = this.apartments.get(index);
+
+        Apartment apt = apartmentCombo.getSelectionModel().getSelectedItem();
         if (apt != null) {
             this.numField.setText(String.valueOf(apt.getApartmentNum()));
             this.sqField.setText(String.valueOf(apt.getSquareFeet()));
@@ -127,8 +119,8 @@ public class ApartmentController {
             error += apt.setBathrooms(Integer.parseInt(bathroomField.getText()));
             error += apt.setPrice(Double.parseDouble(priceField.getText()));
             if ("" == error) {
-                apt.setAdministrator(people.get(adminCombo.getSelectionModel().getSelectedIndex()));
-                apt.setTenant(people.get(tenantCombo.getSelectionModel().getSelectedIndex()));
+                apt.setAdministrator(adminCombo.getSelectionModel().getSelectedItem());
+                apt.setTenant(tenantCombo.getSelectionModel().getSelectedItem());
 
                 apt.setUpdated(LocalDateTime.now());
                 aptIndex = apartmentCombo.getSelectionModel().getSelectedIndex();
@@ -144,9 +136,7 @@ public class ApartmentController {
     }
 
     private Apartment getSelectedApartmentObject() {
-        int index = apartmentCombo.getSelectionModel().getSelectedIndex();
-
-        return apartments.get(index);
+        return apartmentCombo.getSelectionModel().getSelectedItem();
     }
 
     @FXML

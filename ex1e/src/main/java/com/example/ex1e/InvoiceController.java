@@ -1,5 +1,6 @@
 package com.example.ex1e;
 
+import domain.Apartment;
 import domain.Invoice;
 import domain.LineItem;
 import javafx.event.ActionEvent;
@@ -25,13 +26,13 @@ public class InvoiceController {
     @FXML
     public TextField invoiceDateField;
     @FXML
-    public ComboBox invoiceCombo;
+    public ComboBox<Invoice> invoiceCombo;
     @FXML
     public TextField descriptionField;
     @FXML
     public TextField amountField;
     @FXML
-    public ListView lineItemList;
+    public ListView<LineItem> lineItemList;
     @FXML
     public TextField totalField;
 
@@ -62,20 +63,22 @@ public class InvoiceController {
 
     @FXML
     protected void initialize() {
-        if (this.invoices.size() > 0) {
-            displayInvoice(0);
-            for (Invoice invoice : this.invoices) {
-                invoiceCombo.getItems().add(invoice.toShortString());
+        if (invoices.size() > 0) {
+            for (Invoice invoice : invoices) {
+                invoiceCombo.getItems().add(invoice);
             }
+            this.invoices = null;
             invoiceCombo.getSelectionModel().selectFirst();
             lineItemList.getSelectionModel().selectFirst();
-            displayLineItem(0, this.invoices.get(0));
+            displayInvoice(0);
+            displayLineItem(0, invoiceCombo.getItems().getFirst());
         }
     }
 
     public void displayInvoice(int index){
         totalField.setText("0.0");
-        Invoice invoice1 = this.invoices.get(index);
+        if(index >= 0 && index < invoiceCombo.getItems().size()){
+        Invoice invoice1 = invoiceCombo.getItems().get(index);
         if(invoice1 !=null) {
             this.invoiceIDField.setText(String.valueOf(invoice1.getInvoiceId()));
             this.statusField.setText(String.valueOf(invoice1.getStatus()));
@@ -84,28 +87,22 @@ public class InvoiceController {
             this.dueDateField.setText(String.valueOf(invoice1.getDueDate().format(formatter)));
             this.lineItemList.getItems().clear();
             for (LineItem lineItem:invoice1.getLineItems()) {
-                this.lineItemList.getItems().add(lineItem.toShortString());
+                this.lineItemList.getItems().add(lineItem);
             }
             lineItemList.getSelectionModel().selectFirst();
             if(lineItemList.getItems().size() > 0)
                 displayLineItem();
         }
+        }
     }
     public Invoice getSelectedInvoice(){
-        int indexInvoice = invoiceCombo.getSelectionModel().getSelectedIndex();
-        if(indexInvoice == -1){
-            indexInvoice = 0;
-        }
-        return this.invoices.get(indexInvoice);
+        return invoiceCombo.getSelectionModel().getSelectedItem();
     }
     public void displayLineItem(){
-        int index = lineItemList.getSelectionModel().getSelectedIndex();
-        if(index != -1) {
-            Invoice invoice = this.getSelectedInvoice();
-            LineItem lineItem = invoice.getLineItems().get(index);
+        LineItem lineItem = lineItemList.getSelectionModel().getSelectedItem();
             this.amountField.setText(String.valueOf(lineItem.getAmount()));
             this.descriptionField.setText(lineItem.getDescription());
-        }
+
         calculateTotal();
     }
     public void displayLineItem(int index, Invoice invoice){
@@ -210,12 +207,12 @@ public class InvoiceController {
         invoice.setDueDate(dueDate);
         //aaa
 
-        int comboIndex = invoiceCombo.getSelectionModel().getSelectedIndex();
-        invoiceCombo.getItems().clear();
-        for (Invoice leInvoice:this.invoices) {
-            invoiceCombo.getItems().add(leInvoice.toShortString());
-        }
-        invoiceCombo.getSelectionModel().select(comboIndex);
+//        int comboIndex = invoiceCombo.getSelectionModel().getSelectedIndex();
+//        invoiceCombo.getItems().clear();
+//        for (Invoice leInvoice:this.invoices) {
+//            invoiceCombo.getItems().add(leInvoice);
+//        }
+//        invoiceCombo.getSelectionModel().select(comboIndex);
     }
     public void calculateTotal(){
         double total = 0;

@@ -153,14 +153,9 @@ public class Apartment {
 
     @Override
     public String toString() {
-        return "Apartment:\n" +
-                "\tApartment Id=\t" + this.apartmentId +
-                "\n\tApartment#=\t\t" + this.apartmentNum +
-                "\n\tSquare Feet=\t" + this.squareFeet +
-                "\n\tBathrooms=\t\t" + this.bathrooms +
-                "\n\tPrice=\t\t\t" + this.price +
-                "\n\tUpdated=\t\t" + this.updated +
-                "\n";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return
+                this.apartmentNum + ", $" + this.price + ", " + this.updated.format(formatter);
     }
     public String toShortString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

@@ -151,12 +151,9 @@ public class Invoice {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        return "Invoice{" +
-                "invoiceId=" + invoiceId +
-                ", status=" + status +
-                ", invoiceDate=" + invoiceDate.format(formatter) +
-                ", dueDate=" + dueDate.format(formatter) +
-                '}';
+        return  invoiceId +
+                ", " + status +
+                ", " + invoiceDate.format(formatter) ;
     }
 
     public String toShortString() {

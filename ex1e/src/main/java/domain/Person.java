@@ -65,13 +65,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "personId=" + personId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", updated=" + updated +
-                '}';
+        return
+                personId +
+                        ", " + firstName + ' ' + lastName;
     }
 
     public String toShortString() {

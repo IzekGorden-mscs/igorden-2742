@@ -43,7 +43,7 @@
          <TextField fx:id="sqField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          <TextField fx:id="bathroomField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-         <TextField fx:id="updatedField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         <TextField fx:id="updatedField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     </children>
   </GridPane>
 </AnchorPane>

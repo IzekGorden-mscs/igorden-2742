@@ -46,11 +46,9 @@ public class LineItem {
 
     @Override
     public String toString() {
-        return "LineItem{" +
-                "lineItemId=" + lineItemId +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                '}';
+        return lineItemId +
+                ", " + amount +
+                ", " + description;
     }
     @Override
     public boolean equals(Object o){
