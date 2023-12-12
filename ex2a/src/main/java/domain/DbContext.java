@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class DbContext {
     private static int previousInvoiceId = 1000;
     private static int previousLineItemId = 10000;
+    private static int previousTimeCardId = 10000;
 
     private static ArrayList<Person> people = new ArrayList<Person>();
 
@@ -17,6 +18,7 @@ public class DbContext {
     public static int getNextLineItemId() {
         return ++previousLineItemId;
     }
+    public static int getNextTimeCardId() {return ++previousTimeCardId;}
 
     public static ArrayList<Invoice> getInvoices() {
         ArrayList<Invoice> invoices = new ArrayList<Invoice>();
