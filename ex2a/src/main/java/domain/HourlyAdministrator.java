@@ -53,4 +53,8 @@ public class HourlyAdministrator extends Administrator {
         }
         return total;
     }
+
+    public void addTimeCard(TimeCard card) {
+        timeCards.add(card);
+    }
 }
