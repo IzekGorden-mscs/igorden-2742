@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ex1daaaa.ApartmentController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+  <GridPane layoutX="20.0" layoutY="20.0" prefHeight="395.0" prefWidth="373.0">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+      <Label layoutX="10.0" layoutY="102.0" prefHeight="17.0" prefWidth="101.0" text="Apartment Num: " GridPane.rowIndex="1" />
+      <Label prefHeight="17.0" prefWidth="86.0" text="Square feet: " GridPane.rowIndex="2" />
+      <Label layoutX="10.0" layoutY="102.0" prefHeight="17.0" prefWidth="86.0" text="Bathrooms: " GridPane.rowIndex="3" />
+      <Label layoutX="10.0" layoutY="103.0" prefHeight="17.0" prefWidth="86.0" text="Price: " GridPane.rowIndex="4" />
+      <Label layoutX="10.0" layoutY="322.0" prefHeight="17.0" prefWidth="86.0" text="Updated: " GridPane.rowIndex="5" />
+      <Label layoutX="10.0" layoutY="145.0" prefHeight="17.0" prefWidth="86.0" text="Administrator" GridPane.rowIndex="6" />
+      <Label layoutX="10.0" layoutY="267.0" prefHeight="17.0" prefWidth="86.0" text="Tenant: " GridPane.rowIndex="7" />
+      <Label layoutX="10.0" layoutY="80.0" prefHeight="17.0" prefWidth="86.0" text="Apartment: " />
+      <ComboBox fx:id="apartmentCombo" onAction="#onApartmentSelect" prefWidth="150.0" GridPane.columnIndex="1" />
+      <Button mnemonicParsing="false" onAction="#onApartmentSave" text="Save Apartment" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         <Button mnemonicParsing="false" onAction="#onViewInvoices" text="View Invoices" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+         <ComboBox fx:id="adminCombo" onAction="#onAdminSelect" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         <ComboBox fx:id="tenantCombo" onAction="#onTenantSelect" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         <TextField fx:id="numField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <TextField fx:id="sqField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <TextField fx:id="bathroomField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         <TextField fx:id="updatedField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    </children>
+  </GridPane>
+</AnchorPane>
