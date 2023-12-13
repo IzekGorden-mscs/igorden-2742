@@ -9,6 +9,7 @@
         <module name="ex1e" />
         <module name="ex1c" />
         <module name="ex1dReal" />
+        <module name="ex2c" />
         <module name="ex2a" />
         <module name="demo1" />
       </profile>
