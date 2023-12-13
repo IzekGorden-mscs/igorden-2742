@@ -50,7 +50,7 @@ class TimeCardTest {
                         LocalDateTime.of(2018, 10, 22, 8, 0)));
     }
 
-    //works in batch, but not solo
+    //works in batch, but not when run solo
     @Test
     void jsonStringifyTest() {
         assertEquals("{\"id\": 10002, \"startDateTime\": \"2018/10/22 08:00AM\",\"endDateTime\": \"2018/10/22 06:00PM\"}",
