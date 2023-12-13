@@ -15,7 +15,7 @@ class ContractAdministratorTest {
     void setUp() {
         contractAdmin = new ContractAdministrator(
                 301, "Jane", "Smith", "jane.smith", LocalDateTime.of(1985, 8, 20, 0, 0, 0),
-                "876543210", "555-5678", LocalDateTime.of(2023, 12, 12, 0, 0, 0).minusDays(180), 2000.0);
+                "876543210", "555-5678", LocalDateTime.now().minusDays(180), 2000.0);
     }
 
     @Test

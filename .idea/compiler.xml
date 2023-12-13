@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ex1dReal" />
         <module name="ex1e" />
+        <module name="ex2f" />
         <module name="ex2e" />
         <module name="ex1c" />
         <module name="ex2d" />
