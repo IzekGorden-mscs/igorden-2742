@@ -63,6 +63,10 @@ public class Apartment {
             inv = invoices.get(index).copy();
             this.invoices.remove(index);
         }
+        else{
+            String errMsg = index+ " is out of Bounds";
+            throw new NullPointerException(errMsg);
+        }
         return inv;
     }
 
@@ -98,8 +102,10 @@ public class Apartment {
         String errMsg = "";
         if (apartmentId >= 100 && apartmentId <= 199)
             this.apartmentId = apartmentId;
-        else
+        else{
             errMsg = Integer.toString(apartmentId) + " is invalid. ApartmentId must be >= 101 and <= 199";
+        throw new IllegalArgumentException(errMsg);
+    }
         return errMsg;
     }
 
@@ -107,8 +113,10 @@ public class Apartment {
         String errMsg = "";
         if (apartmentNum != null && apartmentNum.length() >= 1 && apartmentNum.length() <= 4)
             this.apartmentNum = apartmentNum;
-        else
+        else{
             errMsg = "ApartmentNum is required";
+        throw new IllegalArgumentException(errMsg);
+    }
         return errMsg;
     }
 
@@ -116,8 +124,10 @@ public class Apartment {
         String errMsg = "";
         if (squareFeet >= 200 && squareFeet <= 2000)
             this.squareFeet = squareFeet;
-        else
+        else{
             errMsg = Integer.toString(squareFeet) + " is invalid. Square feet must be > 200 and < 2000.";
+        throw new IllegalArgumentException(errMsg);
+    }
         return errMsg;
     }
 
@@ -125,8 +135,10 @@ public class Apartment {
         String errMsg = "";
         if (bathrooms >= 1 && bathrooms <= 3)
             this.bathrooms = bathrooms;
-        else
+        else{
             errMsg = Integer.toString(bathrooms) + " is invalid. Bathrooms must be > 0 and < 4.";
+        throw new IllegalArgumentException(errMsg);
+    }
         return errMsg;
     }
 
@@ -134,8 +146,10 @@ public class Apartment {
         String errMsg = "";
         if (price > 99.99 && price < 9999.99)
             this.price = price;
-        else
+        else{
             errMsg = Double.toString(price) + " is invalid. Price must be > 99.99 and < 9999.99";
+        throw new IllegalArgumentException(errMsg);
+    }
         return errMsg;
     }
 
@@ -167,8 +181,10 @@ public class Apartment {
         if(i >= 0 && i < this.invoices.size()) {
             return this.invoices.get(i).copy();
         }
-        else
-            return null;
+        else {
+            String errMsg = i+ " is out of Bounds";
+            throw new NullPointerException(errMsg);
+        }
     }
 
     public ArrayList<Invoice> getInvoices() {

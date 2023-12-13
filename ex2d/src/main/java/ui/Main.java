@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static dataaccess.PeopleJSONParser.*;
 
@@ -67,6 +68,17 @@ public class Main {
                         System.out.println("\t"+ timeCard);
                     }
                 }
+            }
+        }
+        ArrayList<Exception> exceptions = getExceptions();
+        if(exceptions.size() > 0) {
+            System.out.println("\nExceptions: ");
+            for (Exception e : exceptions) {
+                String cause = "";
+                if(e.getCause() != null){
+                    cause = e.getCause().toString();
+                }
+                System.out.println("\n" + e.toString() + "\n\t" + cause);
             }
         }
     }
