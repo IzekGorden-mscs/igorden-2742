@@ -50,10 +50,10 @@ public class Main {
         if(person != null) {
             people.add(tenant);
         }
-        if(person != null) {
+        if(contractAdministrator != null) {
             people.add(contractAdministrator);
         }
-        if(person != null) {
+        if(hourlyAdministrator != null) {
             people.add(hourlyAdministrator);
         }
 
@@ -61,6 +61,7 @@ public class Main {
             System.out.println(p);
             if(p.getClass() == HourlyAdministrator.class){
                 HourlyAdministrator hourlyAdmin = (HourlyAdministrator)p;
+                hourlyAdministrator = hourlyAdmin;
                 ArrayList<TimeCard> cards = hourlyAdmin.getTimeCards();
                 if(hourlyAdmin != null && cards != null) {
                     for (TimeCard timeCard : cards) {
@@ -80,5 +81,7 @@ public class Main {
                 System.out.println("\n" + e.toString() + "\n\t" + cause);
             }
         }
+        System.out.println("\n\nPRESENTING THE JSONSTRINGIFY METHOD:\n");
+        System.out.println(hourlyAdministrator.jsonStringify());
     }
 }

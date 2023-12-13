@@ -1,68 +1,180 @@
 package domain;
 
-import domain.HourlyAdministrator;
-import domain.TimeCard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HourlyAdministratorTest {
+    HourlyAdministrator hourlyAdmin;
 
-    private HourlyAdministrator hourlyAdmin;
-
+    // initialize this.hourlyAdmin
     @BeforeEach
     void setUp() {
-        hourlyAdmin = new HourlyAdministrator(
-                201, "John", "Doe", "john.doe", LocalDateTime.of(1990, 5, 15, 0, 0, 0),
-                "987654321", "555-1234", LocalDateTime.of(2023, 12, 12, 0, 0, 0).minusDays(365), 15.0);
+        this.hourlyAdmin = new HourlyAdministrator(
+                105, "Eeee", "Eeeee", "eeee.eeeee",
+                LocalDateTime.of(2000, 1, 1, 0, 0, 0),
+                "555-55-5555", "555-555-5555",
+                LocalDateTime.of(2000, 1, 1, 0, 0, 0),
+                50.00);
+    }
 
-        // Add some TimeCard entries for testing
-        LocalDateTime startTime1 = LocalDateTime.of(2023, 1, 1, 9, 0, 0);
-        LocalDateTime endTime1 = LocalDateTime.of(2023, 1, 1, 17, 0, 0);
-        hourlyAdmin.addTimeCard(startTime1, endTime1);
+    // this.hourlyAdmin.addTimeCard(...)
+    // retrieve using getTimeCard()
+    // use indexOf() and substring() to test string starting at "startDateTime"
+    // assertEquals(...)
+    @Test
+    void addTimeCard() {
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        TimeCard timeCard = this.hourlyAdmin.getTimeCard(0);
+        String strTimeCard = timeCard.toString();
+        int i = strTimeCard.indexOf("startDateTime");
+        strTimeCard = strTimeCard.substring(i);
+        assertEquals(
+                "startDateTime=2018/10/22 08:00AM, endDateTime=2018/10/22 06:00PM, hours=10.00", strTimeCard);
+    }
 
-        LocalDateTime startTime2 = LocalDateTime.of(2023, 1, 2, 10, 0, 0);
-        LocalDateTime endTime2 = LocalDateTime.of(2023, 1, 2, 18, 0, 0);
-        hourlyAdmin.addTimeCard(startTime2, endTime2);
+    // attempt to getTimeCard() using invalid index
+    // assert return value is null
+    // this.hourlyAdmin.addTimeCard(...)
+    // use getTimeCard() to retrieve element 0
+    // use indexOf() and substring() to test string starting at "startDateTime"
+    // assertEquals(...)
+    @Test
+    void getTimeCard() {
+        // attempt get using invalid index
+        TimeCard timeCard = this.hourlyAdmin.getTimeCard(0);
+        assertEquals(null, timeCard);
+        // remove using valid index
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        timeCard = this.hourlyAdmin.getTimeCard(0);
+        String strTimeCard = timeCard.toString();
+        int i = strTimeCard.indexOf("startDateTime");
+        strTimeCard = strTimeCard.substring(i);
+        assertEquals(
+                "startDateTime=2018/10/22 08:00AM, endDateTime=2018/10/22 06:00PM, hours=10.00", strTimeCard);
+    }
+
+    // attempt to removeTimeCard() using invalid index
+    // assert return value is null
+    // this.hourlyAdmin.addTimeCard(...)
+    // use removeTimeCard() to retrieve element 0
+    // use indexOf() and substring() to test string starting at "startDateTime"
+    // assertEquals(...)
+    // retrieve ArrayList<TimeCard> using getTimeCards()
+    // test size using AssertEquals(...)
+    @Test
+    void removeTimeCard() {
+        // attempt remove using invalid index
+        TimeCard timeCard = this.hourlyAdmin.removeTimeCard(0);
+        assertEquals(null, timeCard);
+        // remove using valid index
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        timeCard = this.hourlyAdmin.removeTimeCard(0);
+        String strTimeCard = timeCard.toString();
+        int i = strTimeCard.indexOf("startDateTime");
+        strTimeCard = strTimeCard.substring(i);
+        assertEquals(
+                "startDateTime=2018/10/22 08:00AM, endDateTime=2018/10/22 06:00PM, hours=10.00", strTimeCard);
+        // ensure TimeCard has been removed
+        ArrayList<TimeCard> timeCards = this.hourlyAdmin.getTimeCards();
+        assertEquals(0, timeCards.size());
+    }
+
+    // add several TimeCards using addTimeCard(...)
+    // this.hourAdmin.getTimeCards()
+    // for each TimeCard in ArrayList
+    //      assertEquals(this.hourlyAdmin.getTimeCard(...), TimeCard from ArrayList
+    //      assert this.hourlyAdmin.getTimeCard(...) is a copy of TimeCard from ArrayList
+    @Test
+    void getTimeCards() {
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 23, 8, 0),
+                LocalDateTime.of(2018, 10, 23, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 24, 8, 0),
+                LocalDateTime.of(2018, 10, 24, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 25, 8, 0),
+                LocalDateTime.of(2018, 10, 25, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 26, 8, 0),
+                LocalDateTime.of(2018, 10, 26, 18, 0));
+
+        ArrayList<TimeCard> timeCards = this.hourlyAdmin.getTimeCards();
+
+        for (int i = 0; i < timeCards.size(); i++) {
+            assertEquals(this.hourlyAdmin.getTimeCard(i), timeCards.get(i));
+            // ensure getTimeCards() returned copies of TimeCards
+            assertFalse(this.hourlyAdmin.getTimeCard(i) == timeCards.get(i));
+        }
     }
 
     @Test
     void toStringTest() {
-        String result = "201, John Doe Administrator{birthDate=1990-05-15T00:00, ssn='987654321', phone='555-1234', employmentStartDate=2022-12-12T00:00} HourlyAdministrator{hourlyRate=15.0, birthDate=1990-05-15T00:00, ssn='987654321', phone='555-1234', employmentStartDate=2022-12-12T00:00}";
-        assertEquals(hourlyAdmin.toString(), result);
+        String result = "105, Eeee Eeeee Administrator{birthDate=2000-01-01T00:00, ssn='555-55-5555', phone='555-555-5555', employmentStartDate=2000-01-01T00:00} HourlyAdministrator{hourlyRate=50.0, birthDate=2000-01-01T00:00, ssn='555-55-5555', phone='555-555-5555', employmentStartDate=2000-01-01T00:00}";
+        assertEquals(result, this.hourlyAdmin.toString());
+    }
+
+    @Test
+    void calcTotalHours() {
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 23, 8, 0),
+                LocalDateTime.of(2018, 10, 23, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 24, 8, 0),
+                LocalDateTime.of(2018, 10, 24, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 25, 8, 0),
+                LocalDateTime.of(2018, 10, 25, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 26, 8, 0),
+                LocalDateTime.of(2018, 10, 26, 18, 0));
+
+        assertEquals(50.0, this.hourlyAdmin.calcTotalHours());
     }
 
     @Test
     void calcGrossPay() {
-        assertEquals(240.0, this.hourlyAdmin.calcGrossPay());
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 23, 8, 0),
+                LocalDateTime.of(2018, 10, 23, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 24, 8, 0),
+                LocalDateTime.of(2018, 10, 24, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 25, 8, 0),
+                LocalDateTime.of(2018, 10, 25, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 26, 8, 0),
+                LocalDateTime.of(2018, 10, 26, 18, 0));
+
+        assertEquals(2500.0, this.hourlyAdmin.calcGrossPay());
     }
 
+    //This works when you run as a batch test, but not solo
     @Test
-    void addTimeCard() {
+    void jsonStringifyTest() {
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 22, 8, 0),
+                LocalDateTime.of(2018, 10, 22, 18, 0));
+        this.hourlyAdmin.addTimeCard(LocalDateTime.of(2018, 10, 23, 8, 0),
+                LocalDateTime.of(2018, 10, 23, 18, 0));
 
-        LocalDateTime startTime3 = LocalDateTime.of(2023, 1, 3, 8, 0, 0);
-        LocalDateTime endTime3 = LocalDateTime.of(2023, 1, 3, 16, 0, 0);
-        TimeCard card = new TimeCard(startTime3, endTime3);
-        hourlyAdmin.addTimeCard(card);
-
-        assertEquals(card, hourlyAdmin.getTimeCard(2));
+        assertEquals("    {\n" +
+                "      \"subclass\": \"hourlyAdministrator\",\n" +
+                "      \"personId\": 105,\n" +
+                "      \"lastName\": \"Eeeee\",\n" +
+                "      \"firstName\": \"Eeee\",\n" +
+                "      \"userName\": \"eeee.eeeee\",\n" +
+                "      \"birthDate\": \"2000/01/01\",\n" +
+                "      \"ssn\": \"555-55-5555\",\n" +
+                "      \"phone\": \"555-555-5555\",\n" +
+                "      \"employmentStartDate\": \"2000/01/01\",\n" +
+                "      \"hourlyRate\": 50.0,\n" +
+                "      \"timeCards\": [\n" +
+                "       {\"id\": 10011, \"startDateTime\": \"2018/10/22 08:00AM\",\"endDateTime\": \"2018/10/22 06:00PM\"}, \n" +
+                "\t   {\"id\": 10012, \"startDateTime\": \"2018/10/23 08:00AM\",\"endDateTime\": \"2018/10/23 06:00PM\"} \n" +
+                "      ]\n" +
+                "    }", this.hourlyAdmin.jsonStringify());
     }
-
-    @Test
-    void removeTimeCard() {
-        LocalDateTime startTime3 = LocalDateTime.of(2023, 1, 3, 8, 0, 0);
-        LocalDateTime endTime3 = LocalDateTime.of(2023, 1, 3, 16, 0, 0);
-        TimeCard card = new TimeCard(startTime3, endTime3);
-        hourlyAdmin.addTimeCard(card);
-
-
-        TimeCard removedTimeCard = hourlyAdmin.removeTimeCard(2);
-        assertEquals(card, removedTimeCard);
-        assertNotSame(card, removedTimeCard);
-    }
-
 }

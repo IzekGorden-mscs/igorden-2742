@@ -1,5 +1,7 @@
 package domain;
 
+import exceptions.PersonIllegalArgumentException;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -38,7 +40,7 @@ public class Person {
             this.personId = personId;
         else {
             errMsg = Integer.toString(personId) + " is invalid. PersonId must be >= 101 and <= 999";
-            throw new IllegalArgumentException(errMsg);
+            throw new PersonIllegalArgumentException(errMsg);
         }
         return errMsg;
     }
@@ -49,7 +51,7 @@ public class Person {
             this.firstName = firstName;
         else{
             errMsg = firstName + " is invalid. First name must be > 2 and <= 15 characters";
-        throw new IllegalArgumentException(errMsg);
+        throw new  PersonIllegalArgumentException(errMsg);
     }
         return errMsg;
     }
@@ -62,7 +64,7 @@ public class Person {
         else
         {
             errMsg = lastName + " is invalid. Last name must be between 2 and 30 characters";
-        throw new IllegalArgumentException(errMsg);
+        throw new  PersonIllegalArgumentException(errMsg);
     }
         return errMsg;
     }
@@ -101,7 +103,7 @@ public class Person {
                 case "administrator":
                 case "supervisor":
                     errMsg = userName + " is invalid. Admin user names not allowed";
-                    throw new IllegalArgumentException(errMsg);
+                    throw new  PersonIllegalArgumentException(errMsg);
                 default:
                     this.userName = userName;
                     break;
@@ -109,7 +111,7 @@ public class Person {
         }
         else{
             errMsg = userName + " is invalid. User name must be between 5 and 30 characters";
-            throw new IllegalArgumentException(errMsg);
+            throw new  PersonIllegalArgumentException(errMsg);
         }
         return errMsg;
     }

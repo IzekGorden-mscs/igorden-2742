@@ -1,6 +1,8 @@
 package dataaccess;
 
 import domain.*;
+import exceptions.PersonIllegalArgumentException;
+import exceptions.TimeCardIllegalArgException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,9 +16,14 @@ import java.util.ArrayList;
 public class PeopleJSONParser {
     private static String json = "{}";
     private static ArrayList<Exception> exceptions = new ArrayList<Exception>();
+    private static ArrayList<Exception> domainExceptions = new ArrayList<Exception>();
 
     public static ArrayList<Exception> getExceptions() {
         return exceptions;
+    }
+
+    public static ArrayList<Exception> getDomainExceptions() {
+        return domainExceptions;
     }
 
     public static void readFile(String path) throws IOException {
@@ -153,11 +160,16 @@ public class PeopleJSONParser {
                         if (hA != null)
                             people.add(hA);
                         break;
-                        default:
-                            String msg = item.getString("subclass")+ " is not a valid person object subclass";
-                            throw new IllegalArgumentException(msg);
+                    default:
+                        String msg = item.getString("subclass") + " is not a valid person object subclass";
+                        throw new IllegalArgumentException(msg);
 
                 }
+            } catch (PersonIllegalArgumentException | TimeCardIllegalArgException e) {
+//                String msg = e.toString();
+//                msg += "\n" + i + ":" + e.getCause();
+//                System.out.println(msg);
+                domainExceptions.add(e);
             } catch (Exception e) {
 //                String msg = e.toString();
 //                msg += "\n" + i + ":" + e.getCause();
